@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class CashFlowApplication
 
 fun main(args: Array<String>) {
+    println("Running CashFlow Application")
     runApplication<CashFlowApplication>(*args)
 }
