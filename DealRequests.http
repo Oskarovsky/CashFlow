@@ -1,0 +1,19 @@
+http://localhost:8080
+
+###
+
+http://localhost:8080/deal
+
+###
+
+http://localhost:8080/deal/20
+
+###
+
+POST http://localhost:8080/deal
+Content-Type: application/json
+
+{"name": "TestTrans", "price": 22}
+
+###
+
