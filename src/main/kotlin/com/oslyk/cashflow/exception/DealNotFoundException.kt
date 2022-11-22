@@ -1,3 +1,3 @@
 package com.oslyk.cashflow.exception
 
-class DealNotFoundException: Exception()
+class DealNotFoundException(override val message: String): Exception(message)

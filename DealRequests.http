@@ -1,19 +1,19 @@
-http://localhost:8080
+GET http://localhost:8080
 
 ###
 
-http://localhost:8080/deal
+GET http://localhost:8080/deal
 
 ###
 
-http://localhost:8080/deal/20
+http://localhost:8080/deal/0dd95d33-e4c4-4064-baf2-b9897917f49c
 
 ###
 
 POST http://localhost:8080/deal
 Content-Type: application/json
 
-{"name": "TestTrans", "price": 22}
+{"name": "TestTrans1", "type": "food","price": 22}
 
 ###
 
