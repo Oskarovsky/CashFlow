@@ -18,32 +18,35 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDateTime
 import java.util.Date
+import javax.validation.Valid
+import javax.validation.constraints.PastOrPresent
 
 @RestController
 class FinanceController(
-        val dealRepository: DealRepository,
         val dealService: DealService
 ) {
 
     val logger: Logger = LoggerFactory.getLogger(FinanceController::class.java)
 
-    @GetMapping(value = ["/"])
-    fun getMain() = "Main page"
-
-    @GetMapping("/deal")
+    // region DEAL
+    @GetMapping(value = ["/deal"])
     @ResponseStatus(HttpStatus.OK)
-    fun getDeals(): List<Deal> = dealService.getAllDeals()
+    fun getDeals(): List<Deal> {
+        return dealService.getAllDeals()
+    }
 
     @GetMapping(value = ["/deal/{id}"])
-    fun getDealById(@PathVariable id: String): Deal? {
+    @ResponseStatus(HttpStatus.OK)
+    fun getDealById(@PathVariable id: String): Deal {
         logger.info("Fetching Deal with id $id")
         return dealService.getDealById(id)
     }
 
     @PostMapping(value = ["/deal"])
     @ResponseStatus(HttpStatus.CREATED)
-    fun addDeal(@RequestBody dealDto: DealDto): ResponseEntity<Deal> {
+    fun createDeal(@RequestBody dealDto: DealDto): ResponseEntity<Deal> {
         logger.info("Adding new deal finance to database")
         return ResponseEntity(dealService.createDeal(dealDto), HttpStatus.CREATED)
     }
@@ -59,15 +62,17 @@ class FinanceController(
 
     @DeleteMapping(value = ["/deal/{id}"])
     @ResponseStatus(HttpStatus.OK)
-    private fun deleteDeal(id: String) {
-
+    private fun deleteDeal(@PathVariable id: String) {
+        dealService.deleteDeal(id)
     }
+
+    // endregion
 
     data class DealDto(
             @get:NotBlank val name: String?,
             @get:NotBlank val type: String?,
             @get:NotBlank val price: Double?,
-            val date: Date
+            @PastOrPresent val date: LocalDateTime?
     )
 
     data class ItemDto(
