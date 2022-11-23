@@ -22,18 +22,31 @@ class DealServiceBean(val dealRepository: DealRepository): DealService {
     }
 
     override fun createDeal(dealDto: FinanceController.DealDto): Deal {
-        TODO("Not yet implemented")
+        return dealRepository
+                .save(Deal(name = dealDto.name.orEmpty(), type = dealDto.type.orEmpty(), date = dealDto.date, price = dealDto.price ?: 0.0))
     }
 
     override fun updateDeal(id: String, dealDto: FinanceController.DealDto): Deal {
-        TODO("Not yet implemented")
+        val deal: Deal = dealRepository
+                .findById(id)
+                .orElseThrow { DealNotFoundException("Could not find Deal with $id") }
+
+        val updatedDeal = deal.copy(
+                name = dealDto.name.orEmpty(),
+                type = dealDto.type.orEmpty(),
+                date = dealDto.date,
+                price = dealDto.price ?: 0.0
+        )
+
+        updatedDeal.id = id
+        return dealRepository.save(updatedDeal)
+    }
+
+    override fun updateDeal(deal: Deal): Deal {
+        return dealRepository.save(deal)
     }
 
     override fun deleteDeal(id: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun addItemToDeal(itemId: String, dealId: String): Deal {
-        TODO("Not yet implemented")
+        dealRepository.delete(getDealById(id))
     }
 }

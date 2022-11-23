@@ -17,9 +17,8 @@ interface DealService {
     @Throws(DealNotFoundException::class)
     fun updateDeal(id: String, dealDto: FinanceController.DealDto): Deal
 
+    fun updateDeal(deal: Deal): Deal
+
     @Throws(DealNotFoundException::class)
     fun deleteDeal(id: String)
-
-    @Throws(ItemNotFoundException::class, DealNotFoundException::class)
-    fun addItemToDeal(itemId: String, dealId: String): Deal
 }

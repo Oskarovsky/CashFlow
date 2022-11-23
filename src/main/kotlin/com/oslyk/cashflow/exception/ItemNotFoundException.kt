@@ -1,4 +1,4 @@
 package com.oslyk.cashflow.exception
 
-class ItemNotFoundException: Exception() {
+class ItemNotFoundException(override val message: String): Exception(message) {
 }

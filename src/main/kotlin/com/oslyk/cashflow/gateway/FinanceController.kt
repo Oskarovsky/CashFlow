@@ -4,13 +4,17 @@ import com.oslyk.cashflow.repo.DealRepository
 import com.oslyk.cashflow.exception.DealNotFoundException
 import com.oslyk.cashflow.model.Deal
 import com.oslyk.cashflow.service.DealService
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.DeleteMapping
 import javax.validation.constraints.NotBlank
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
@@ -22,28 +26,41 @@ class FinanceController(
         val dealService: DealService
 ) {
 
-    val logger = LoggerFactory.getLogger(FinanceController::class.java)
+    val logger: Logger = LoggerFactory.getLogger(FinanceController::class.java)
 
-    @GetMapping("/")
+    @GetMapping(value = ["/"])
     fun getMain() = "Main page"
 
     @GetMapping("/deal")
-    fun getDeals(): ResponseEntity<List<Deal>> {
-        logger.info("Fetching all deals")
-        return ResponseEntity<List<Deal>>(dealService.getAllDeals(), HttpStatus.OK)
-    }
+    @ResponseStatus(HttpStatus.OK)
+    fun getDeals(): List<Deal> = dealService.getAllDeals()
 
-    @GetMapping("/deal/{id}")
+    @GetMapping(value = ["/deal/{id}"])
     fun getDealById(@PathVariable id: String): Deal? {
+        logger.info("Fetching Deal with id $id")
         return dealService.getDealById(id)
     }
 
-    @PostMapping("/deal")
+    @PostMapping(value = ["/deal"])
     @ResponseStatus(HttpStatus.CREATED)
-    fun addDeal(@RequestBody deal: Deal): ResponseEntity<Deal> {
+    fun addDeal(@RequestBody dealDto: DealDto): ResponseEntity<Deal> {
         logger.info("Adding new deal finance to database")
-        dealRepository.save(deal)
-        return ResponseEntity(deal, HttpStatus.CREATED)
+        return ResponseEntity(dealService.createDeal(dealDto), HttpStatus.CREATED)
+    }
+
+    @PutMapping(value = ["/deal/{id}"])
+    @ResponseStatus(HttpStatus.OK)
+    private fun updateDeal(
+            @PathVariable id: String,
+            @Validated deal: DealDto
+): Deal {
+        return dealService.updateDeal(id, deal)
+    }
+
+    @DeleteMapping(value = ["/deal/{id}"])
+    @ResponseStatus(HttpStatus.OK)
+    private fun deleteDeal(id: String) {
+
     }
 
     data class DealDto(
@@ -51,5 +68,10 @@ class FinanceController(
             @get:NotBlank val type: String?,
             @get:NotBlank val price: Double?,
             val date: Date
+    )
+
+    data class ItemDto(
+            @get:NotBlank val name: String,
+            @get:NotBlank val price: Double
     )
 }
