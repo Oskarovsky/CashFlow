@@ -5,6 +5,7 @@ import com.oslyk.cashflow.gateway.FinanceController
 import com.oslyk.cashflow.model.Deal
 import com.oslyk.cashflow.repo.DealRepository
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Service
@@ -24,7 +25,7 @@ class DealServiceBean(val dealRepository: DealRepository): DealService {
 
     override fun createDeal(dealDto: FinanceController.DealDto): Deal {
         return dealRepository
-                .save(Deal(name = dealDto.name.orEmpty(), type = dealDto.type.orEmpty(), date = dealDto.date ?: LocalDateTime.now(), price = dealDto.price ?: 0.0))
+                .save(Deal(name = dealDto.name.orEmpty(), type = dealDto.type.orEmpty(), date = dealDto.date ?: LocalDate.now(), price = dealDto.price ?: 0.0))
     }
 
     override fun updateDeal(id: String, dealDto: FinanceController.DealDto): Deal {
@@ -35,7 +36,7 @@ class DealServiceBean(val dealRepository: DealRepository): DealService {
         val updatedDeal = deal.copy(
                 name = dealDto.name.orEmpty(),
                 type = dealDto.type.orEmpty(),
-                date = dealDto.date ?: LocalDateTime.now(),
+                date = dealDto.date ?: deal.date,
                 price = dealDto.price ?: 0.0
         )
 
