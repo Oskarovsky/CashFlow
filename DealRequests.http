@@ -1,19 +1,29 @@
-GET http://localhost:8080
+GET http://localhost:8080/api/v1
 
 ###
 
-GET http://localhost:8080/deal
+GET http://localhost:8080/api/v1/deal
 
 ###
 
-GET http://localhost:8080/deal/0dd95d33-e4c4-4064-baf2-b9897917f49c
+GET http://localhost:8080/api/v1/deal/937634e8-159a-4903-81cf-08bf44b29226
 
 ###
 
-POST http://localhost:8080/deal
+POST http://localhost:8080/api/v1/deal
 Content-Type: application/json
 
-{"name": "TestTrans2", "type": "food", "price": 22.00, "date": "2021-01-24T15:53:16"}
+{"name": "TestTrans2", "type": "food", "price": 22.00, "date": "2021-01-24"}
 
 ###
 
+PUT http://localhost:8080/api/v1/deal/937634e8-159a-4903-81cf-08bf44b29226
+Content-Type: application/json
+
+{"name": "TestTrans2", "type": "foo2d", "price": 22.00, "date": "2021-01-24"}
+
+###
+
+DELETE http://localhost:8080/api/v1/deal/0dd95d33-e4c4-4064-baf2-b9897917f49c
+
+###
