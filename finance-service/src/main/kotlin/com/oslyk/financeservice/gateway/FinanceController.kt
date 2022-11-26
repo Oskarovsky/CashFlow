@@ -3,10 +3,10 @@ package com.oslyk.financeservice.gateway
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
-import com.oslyk.cashflow.model.Deal
-import com.oslyk.cashflow.model.Item
-import com.oslyk.cashflow.service.DealService
-import com.oslyk.cashflow.service.ItemService
+import com.oslyk.financeapi.model.Deal
+import com.oslyk.financeapi.model.Item
+import com.oslyk.financeservice.service.DealService
+import com.oslyk.financeservice.service.ItemService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.format.annotation.DateTimeFormat

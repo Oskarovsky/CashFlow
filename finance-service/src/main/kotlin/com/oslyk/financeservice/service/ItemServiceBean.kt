@@ -1,10 +1,10 @@
 package com.oslyk.financeservice.service
 
-import com.oslyk.cashflow.exception.ItemNotFoundException
-import com.oslyk.cashflow.gateway.FinanceController
-import com.oslyk.cashflow.model.Deal
-import com.oslyk.cashflow.model.Item
-import com.oslyk.cashflow.repo.ItemRepository
+import com.oslyk.financeservice.exception.ItemNotFoundException
+import com.oslyk.financeservice.gateway.FinanceController
+import com.oslyk.financeapi.model.Deal
+import com.oslyk.financeapi.model.Item
+import com.oslyk.financeservice.repo.ItemRepository
 import org.springframework.stereotype.Service
 
 @Service

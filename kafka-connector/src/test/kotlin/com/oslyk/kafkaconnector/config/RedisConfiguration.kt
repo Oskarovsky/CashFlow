@@ -1,4 +1,4 @@
-package com.oslyk.financeservice.config
+package com.oslyk.kafkaconnector.config
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean

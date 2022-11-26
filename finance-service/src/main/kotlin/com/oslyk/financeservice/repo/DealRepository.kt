@@ -1,6 +1,6 @@
 package com.oslyk.financeservice.repo
 
-import com.oslyk.cashflow.model.Deal
+import com.oslyk.financeapi.model.Deal
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 

@@ -1,8 +1,8 @@
 package com.oslyk.financeservice.service
 
-import com.oslyk.cashflow.exception.DealNotFoundException
-import com.oslyk.cashflow.gateway.FinanceController
-import com.oslyk.cashflow.model.Deal
+import com.oslyk.financeservice.exception.DealNotFoundException
+import com.oslyk.financeservice.gateway.FinanceController
+import com.oslyk.financeapi.model.Deal
 
 interface DealService {
 

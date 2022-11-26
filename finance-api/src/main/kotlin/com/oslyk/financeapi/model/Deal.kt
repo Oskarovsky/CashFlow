@@ -1,12 +1,10 @@
-package com.oslyk.financeservice.model
+package com.oslyk.financeapi.model
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.Reference
 import org.springframework.data.redis.core.RedisHash
 import org.springframework.data.redis.core.index.Indexed
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.Date
 
 @RedisHash
 data class Deal(
