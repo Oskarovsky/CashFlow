@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.oslyk"
-version = "0.0.3-SNAPSHOT"
+version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -16,6 +16,8 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":finance-api"))
+
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -24,6 +26,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("redis.clients:jedis:4.3.1")
     implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -38,3 +41,5 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.register("prepareKotlinBuildScriptModel"){}
