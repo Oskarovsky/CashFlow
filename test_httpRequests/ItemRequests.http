@@ -2,7 +2,7 @@ GET http://localhost:8080/api/v1/item
 
 ###
 
-POST http://localhost:8080/api/v1/deal/937634e8-159a-4903-81cf-08bf44b29226/item
+POST http://localhost:8080/api/v1/deal/0aa458b5-8807-4bd4-a04a-26d4e96c050e/item
 Content-Type: application/json
 
 {"name": "Thing", "price": 11.00}
