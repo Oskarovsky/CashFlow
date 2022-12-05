@@ -1,6 +1,7 @@
 package com.oslyk.financeservice.repo
 
 import com.oslyk.financeapi.model.Deal
+import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
@@ -17,5 +18,11 @@ class DealRepositoryTest(
         val deal: Deal = Deal("dealTest_1", "food", LocalDate.now(), 22.20)
         val newDeal: Deal = dealRepository.save(deal)
         Assert.notNull(newDeal)
+    }
+
+    @Test
+    fun `should find deal by name`() {
+        val deals: List<Deal> = dealRepository.findAllByName("dealTest_1")
+        Assert.notEmpty(deals)
     }
 }
