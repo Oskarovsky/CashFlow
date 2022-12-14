@@ -5,4 +5,7 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DealRepository: CrudRepository<Deal, String> { }
+interface DealRepository: CrudRepository<Deal, String> {
+
+    fun findAllByName(name: String): List<Deal>
+}

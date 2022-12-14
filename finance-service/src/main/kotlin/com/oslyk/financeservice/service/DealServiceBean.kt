@@ -50,4 +50,8 @@ class DealServiceBean(val dealRepository: DealRepository): DealService {
     override fun deleteDeal(id: String) {
         dealRepository.delete(getDealById(id))
     }
+
+    override fun getDealsByName(name: String): List<Deal> {
+        return dealRepository.findAllByName(name)
+    }
 }

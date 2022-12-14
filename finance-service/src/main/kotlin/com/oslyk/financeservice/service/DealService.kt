@@ -20,4 +20,6 @@ interface DealService {
 
     @Throws(DealNotFoundException::class)
     fun deleteDeal(id: String)
+
+    fun getDealsByName(name: String): List<Deal>
 }
