@@ -15,7 +15,7 @@ class DealRepositoryTest(
 
     @Test
     fun `should add new deal`() {
-        val deal: Deal = Deal("dealTest_1", "food", LocalDate.now(), 22.20)
+        val deal = Deal("dealTest_1", "food", LocalDate.now(), 22.20)
         val newDeal: Deal = dealRepository.save(deal)
         Assert.notNull(newDeal)
     }
