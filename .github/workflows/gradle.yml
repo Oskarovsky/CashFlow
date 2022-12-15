@@ -27,4 +27,4 @@ jobs:
           java-version: 17
           distribution: 'adopt'
       - name: Build with Gradle
-        run: ./gradlew finance-service:build --args='--spring.profiles.active=dev'
+        run: ./gradlew finance-service:build
