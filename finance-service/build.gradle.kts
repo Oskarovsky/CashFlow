@@ -49,7 +49,9 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.register("bootRunDev") {
+tasks.register("prepareKotlinBuildScriptModel"){}
+
+tasks.register("buildDev") {
     group = "application"
     description = "Runs this project as a Spring Boot application with the dev profile"
     doFirst {
@@ -57,7 +59,5 @@ tasks.register("bootRunDev") {
             systemProperty("spring.profiles.active", "prod")
         }
     }
-    finalizedBy("bootRun")
+    finalizedBy("build")
 }
-
-tasks.register("prepareKotlinBuildScriptModel"){}
