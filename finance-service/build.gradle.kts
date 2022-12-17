@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
+    java
     id("org.springframework.boot") version "2.7.5"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.21"
@@ -51,13 +52,3 @@ tasks.withType<Test> {
 
 tasks.register("prepareKotlinBuildScriptModel"){}
 
-tasks.register("buildDev") {
-    group = "application"
-    description = "Runs this project as a Spring Boot application with the dev profile"
-    doFirst {
-        tasks.bootRun.configure {
-            systemProperty("spring.profiles.active", "prod")
-        }
-    }
-    finalizedBy("build")
-}
