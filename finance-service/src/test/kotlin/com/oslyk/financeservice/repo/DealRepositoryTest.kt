@@ -2,15 +2,20 @@ package com.oslyk.financeservice.repo
 
 import com.oslyk.financeapi.model.Deal
 import io.mockk.verify
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Profile
 import org.springframework.test.context.ActiveProfiles
+import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.util.Assert
 import java.time.LocalDate
 
-@ActiveProfiles("dev")
-@DataRedisTest
+@Disabled
+@DataRedisTest(properties = ["spring.profiles.active=test"])
 class DealRepositoryTest(
         @Autowired val dealRepository: DealRepository
 ) {
