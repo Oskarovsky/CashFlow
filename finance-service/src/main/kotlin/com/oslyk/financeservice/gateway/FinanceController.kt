@@ -36,17 +36,17 @@ class FinanceController(
     val logger: Logger = LoggerFactory.getLogger(FinanceController::class.java)
 
     // region DEAL
-    @GetMapping(value = ["/deal"])
+    @GetMapping(value = ["/deal"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.OK)
-    fun getDeals(): List<Deal> {
-        return dealService.getAllDeals()
+    fun getDeals(): ResponseEntity<List<Deal>> {
+        return ResponseEntity(dealService.getAllDeals(), HttpStatus.OK)
     }
 
     @GetMapping(value = ["/deal/{dealId}"])
     @ResponseStatus(HttpStatus.OK)
-    fun getDealById(@PathVariable dealId: String): Deal {
+    fun getDealById(@PathVariable dealId: String): ResponseEntity<Deal> {
         logger.info("Fetching Deal with id $dealId")
-        return dealService.getDealById(dealId)
+        return ResponseEntity(dealService.getDealById(dealId), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/deal"])
@@ -61,8 +61,8 @@ class FinanceController(
     private fun updateDeal(
             @PathVariable dealId: String,
             @Validated @RequestBody deal: DealDto
-    ): Deal {
-        return dealService.updateDeal(dealId, deal)
+    ): ResponseEntity<Deal> {
+        return ResponseEntity(dealService.updateDeal(dealId, deal), HttpStatus.OK)
     }
 
     @DeleteMapping(value = ["/deal/{dealId}"])
@@ -75,16 +75,16 @@ class FinanceController(
     // region ITEM
     @GetMapping("/item")
     @ResponseStatus(HttpStatus.OK)
-    private fun getAllItems(): List<Item> {
-        return itemService.getAllItems()
+    private fun getAllItems(): ResponseEntity<List<Item>> {
+        return ResponseEntity(itemService.getAllItems(), HttpStatus.OK)
     }
 
     @PostMapping(value = ["/deal/{dealId}/item"])
     @ResponseStatus(HttpStatus.CREATED)
     private fun addItem(@PathVariable dealId: String,
                         @RequestBody itemDto: ItemDto
-    ): Item {
-        return itemService.createItemForDeal(dealId, itemDto)
+    ): ResponseEntity<Item> {
+        return ResponseEntity(itemService.createItemForDeal(dealId, itemDto), HttpStatus.CREATED)
     }
 
     @DeleteMapping(value = ["/deal/{dealId}/item/{itemId}"])

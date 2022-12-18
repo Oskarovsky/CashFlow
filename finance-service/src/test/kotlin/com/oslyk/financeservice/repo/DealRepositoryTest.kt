@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Profile
+import org.springframework.context.annotation.PropertySource
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.util.Assert
 import java.time.LocalDate
 
 @Disabled
-@DataRedisTest(properties = ["spring.profiles.active=test"])
+@DataRedisTest
 class DealRepositoryTest(
         @Autowired val dealRepository: DealRepository
 ) {
