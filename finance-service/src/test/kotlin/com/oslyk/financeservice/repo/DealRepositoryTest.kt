@@ -1,6 +1,7 @@
 package com.oslyk.financeservice.repo
 
 import com.oslyk.financeapi.model.Deal
+import com.oslyk.financeservice.gateway.FinanceController
 import io.mockk.verify
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -17,6 +18,7 @@ import java.time.LocalDate
 
 @Disabled
 @DataRedisTest
+@ActiveProfiles(value = ["dev"])
 class DealRepositoryTest(
         @Autowired val dealRepository: DealRepository
 ) {
