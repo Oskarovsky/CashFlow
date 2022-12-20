@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
@@ -38,8 +39,11 @@ class FinanceController(
     // region DEAL
     @GetMapping(value = ["/deal"], produces = ["application/json"])
     @ResponseStatus(HttpStatus.OK)
-    fun getDeals(): ResponseEntity<List<Deal>> {
-        return ResponseEntity(dealService.getAllDeals(), HttpStatus.OK)
+    fun getDeals(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) startDate: LocalDate?,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) endDate: LocalDate?
+    ): ResponseEntity<List<Deal>> {
+        return ResponseEntity(dealService.getAllDeals(startDate, endDate), HttpStatus.OK)
     }
 
     @GetMapping(value = ["/deal/{dealId}"])
@@ -70,6 +74,7 @@ class FinanceController(
     private fun deleteDeal(@PathVariable dealId: String) {
         dealService.deleteDeal(dealId)
     }
+
     // endregion
 
     // region ITEM

@@ -4,11 +4,14 @@ import com.oslyk.financeservice.exception.DealNotFoundException
 import com.oslyk.financeservice.gateway.FinanceController
 import com.oslyk.financeapi.model.Deal
 import com.oslyk.financeservice.repo.DealRepository
+import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
 @Service
-class DealServiceBean(val dealRepository: DealRepository): DealService {
+class DealServiceBean(
+        val dealRepository: DealRepository,
+        val redisTemplate: RedisTemplate<String, String>): DealService {
 
     override fun getDealById(id: String): Deal {
         return dealRepository
@@ -16,10 +19,16 @@ class DealServiceBean(val dealRepository: DealRepository): DealService {
                 .orElseThrow { DealNotFoundException("Unable to find movie for id $id") }
     }
 
-    override fun getAllDeals(): List<Deal> {
-        return dealRepository
-                .findAll()
-                .toList()
+    override fun getAllDeals(startDate: LocalDate?, endDate: LocalDate?): List<Deal> {
+        return if (startDate != null && endDate != null) {
+            dealRepository.findAllByDateBetween(startDate, endDate).toList()
+        } else if (startDate != null) {
+            dealRepository.findAllByDateAfter(startDate).toList()
+        } else if (endDate != null) {
+            dealRepository.findAllByDateBefore(endDate).toList()
+        } else {
+            dealRepository.findAll().toList()
+        }
     }
 
     override fun createDeal(dealDto: FinanceController.DealDto): Deal {
