@@ -3,6 +3,7 @@ package com.oslyk.financeservice.service
 import com.oslyk.financeservice.exception.DealNotFoundException
 import com.oslyk.financeservice.gateway.FinanceController
 import com.oslyk.financeapi.model.Deal
+import com.oslyk.financeservice.repo.DealRedisRepository
 import com.oslyk.financeservice.repo.DealRepository
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
@@ -11,6 +12,7 @@ import java.time.LocalDate
 @Service
 class DealServiceBean(
         val dealRepository: DealRepository,
+        val dealRedisRepository: DealRedisRepository,
         val redisTemplate: RedisTemplate<String, String>): DealService {
 
     override fun getDealById(id: String): Deal {
@@ -62,5 +64,9 @@ class DealServiceBean(
 
     override fun getDealsByName(name: String): List<Deal> {
         return dealRepository.findAllByName(name)
+    }
+
+    override fun dealTest() {
+        dealRedisRepository.testHashOp()
     }
 }
