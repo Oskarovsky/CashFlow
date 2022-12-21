@@ -9,10 +9,4 @@ import org.springframework.data.redis.core.RedisTemplate
 @Configuration
 class SwaggerConfiguration {
 
-    @Bean
-    fun redisTemplate(redisConnectionFactory: RedisConnectionFactory?): RedisTemplate<String, String>? {
-        val template = RedisTemplate<String, String>()
-        template.setConnectionFactory(redisConnectionFactory!!)
-        return template
-    }
 }

@@ -23,4 +23,6 @@ interface DealService {
     fun deleteDeal(id: String)
 
     fun getDealsByName(name: String): List<Deal>
+
+    fun dealTest()
 }

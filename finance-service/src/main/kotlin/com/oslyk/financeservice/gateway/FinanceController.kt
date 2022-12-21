@@ -101,6 +101,11 @@ class FinanceController(
         itemService.deleteItem(itemId)
     }
 
+    @GetMapping(value = ["/deal/test"])
+    private fun redisTest() {
+        dealService.dealTest()
+    }
+
     // endregion
 
     data class DealDto(
