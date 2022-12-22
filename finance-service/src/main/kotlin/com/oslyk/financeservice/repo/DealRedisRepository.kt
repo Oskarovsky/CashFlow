@@ -27,8 +27,11 @@ class DealRedisRepository {
         logger.info("Result: {}", this.hashOperations)
 
         logger.info("=====")
-        hashOperations.put("USER", "cashFlowKey", "cashFlowValue");
+        hashOperations.put("USER", "cashFlowKey1", "cashFlowValue1");
+        hashOperations.put("USER", "cashFlowKey2", "cashFlowValue2");
+        hashOperations.put("USER", "cashFlowKey3", "cashFlowValue3");
 
+        logger.info("Entries: {}", hashOperations.entries("USER"))
         logger.info("Result: {}", hashOperations.get("USER", "cashFlowKey"))
         logger.info("=== END TESTING ===")
     }
